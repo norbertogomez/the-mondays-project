@@ -42,6 +42,8 @@ During this command some questions will be prompted, answer them with yes.
 * [Zoonavigator](https://zoonavigator.elkozmon.com/en/latest/)
 * [KsqlDB](https://ksqldb.io/)
 * [Kafka Connect](https://docs.confluent.io/home/connect/overview.html)
+* [Podman](https://podman.io/)
+* [Docker](https://www.docker.com/)
 
 ## Authors
 
