@@ -19,7 +19,7 @@ run-monday-go: ## Runs Golang App 🏃
 	@podman run $(golang_app_container)
 	@echo -e "🏃 - Done - 🏃\n"
 
-start: start-kafka ## Starts the application 🎬.
+start: start-kafka build-monday-go ## Starts the application 🎬.
 
 start-kafka: ## Starts Kafka cluster 🔌
 	@echo -e "🔌 - Starting Kafka Cluster - 🔌\n"

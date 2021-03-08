@@ -8,6 +8,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Project Structure
 ```
+the-mondays-project
+├── devops
+│   └── docker
+│       └── kafka
+│           └── full-stack
+├── memories
+└── monday
+    └── GoApp
 
 ```
 
@@ -16,6 +24,7 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 1. Install Docker version 19.03.8 minimum and docker-compose version 1.27.4.
+2. Podman minimum version 3.0.0
 
 
 ### Installing
@@ -25,14 +34,8 @@ In order to set up this project a Makefile has been provided.
 To do a fresh install you need to run the following command at the root folder of the project.
 
 ```
-Make bootstrap
+Make start
 ```
-During this command some questions will be prompted, answer them with yes.
-
-## Running the tests
-
-
-## Application Endpoints
 
 
 ## Built With
