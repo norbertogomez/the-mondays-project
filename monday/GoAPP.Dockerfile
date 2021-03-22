@@ -10,4 +10,6 @@ FROM scratch
 
 COPY --from=build /go/bin/GoApp /go/bin/GoApp
 
+EXPOSE 8080
+
 ENTRYPOINT ["/go/bin/GoApp"]

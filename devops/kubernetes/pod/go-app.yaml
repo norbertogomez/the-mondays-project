@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: go-app
+  name: go-app
+spec:
+  containers:
+    - image: go-app
+      name: go-app
+      ports:
+        - containerPort: 8080
+          name: http
+      resources: {}
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: http
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: http
+      imagePullPolicy: Never
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
