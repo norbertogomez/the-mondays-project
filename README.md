@@ -72,7 +72,9 @@ Make kubernetes-deploy-go-app
 * [Kubernetes](https://kubernetes.io/)
 
 ## Certifications
+
 ![CodelyTv Kubernetes Certification](course-certifications/kubernetes/kubernetes-cert.png)
+![CodelyTv Prometheus Certification](course-certifications/monitoring/prometheus/prometheus-cert.png)
 
 ## Authors
 

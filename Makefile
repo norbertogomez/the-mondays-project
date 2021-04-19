@@ -1,6 +1,7 @@
 SHELL := /bin/bash
 
 # Makefile variables
+default_network := mondays_default
 golang_app_container := go-app
 
 build-monday-go: ## Build Monday Go App with Podman 🛠
@@ -68,12 +69,18 @@ kubernetes-open-go-app: ## Opens minikube exposed Go app service in browser
 
 kubernetes-prune: kubernetes-delete-deploys kubernetes-delete-pods kubernetes-delete-svc ## Deletes all the running kubernetes things
 
-run-monday-go: ## Runs Golang App 🏃
+run-monday-go-docker: ## Runs Golang App with Docker🏃
+	@echo -e "🏃 - Running Golang App - 🏃\n"
+	@docker build -f monday/GoAPP.Dockerfile --no-cache -t $(golang_app_container) monday
+	@docker run --network="$(default_network)" --name monday-go $(golang_app_container)
+	@echo -e "\n✅ - Done - ✅\n"
+
+run-monday-go-podman: ## Runs Golang App with Podman 🏃
 	@echo -e "🏃 - Running Golang App - 🏃\n"
 	@podman run $(golang_app_container)
 	@echo -e "\n✅ - Done - ✅\n"
 
-start: start-kafka build-monday-go ## Starts the application 🎬.
+start: build-monday-go start-prometheus ## Starts the application 🎬.
 
 start-kafka: ## Starts Kafka cluster 🔌
 	@echo -e "🔌 - Starting Kafka Cluster - 🔌\n"
@@ -85,14 +92,27 @@ start-kubernetes: ## Starts Kubernetes environment 🔌
 	@minikube start
 	@echo -e "\n✅ - Done - ✅\n"
 
+start-prometheus: ## 📊 Starts Prometheus monitoring 📊
+	@echo -e " 🔌 - Starting Prometheus - 🔌 "
+	@docker-compose -f devops/monitoring/prometheus/docker-compose.yaml up -d
+	@echo -e "\n✅ - Done - ✅\n"
+
 stop-kubernetes: ## Stops Kubernetes environment 🛑
 	@echo -e "🛑 - Stopping Kubernetes environment - 🛑\n"
 	@minikube stop
 	@echo -e "\n✅ - Done - ✅\n"
 
+stop-prometheus: ## Stops Prometheus monitoring 🛑
+	@echo -e "🛑 - Stopping Prometheus monitoring - 🛑\n"
+	@docker-compose -f devops/monitoring/prometheus/docker-compose.yaml down
+	@echo -e "\n✅ - Done - ✅\n"
+
 status: ## Displays the status of all the services 💤.
 	@echo -e "🐳 - Docker compose containers - 🐳\n"
+	@echo -e "\n🚀 - Kafka containers - 🚀\n"
 	@docker-compose -f devops/docker/kafka/docker-compose.yml ps
+	@echo -e "\n📊 - Monitoring containers - 📊\n"
+	@docker-compose -f devops/monitoring/prometheus/docker-compose.yaml ps
 	@echo -e "\n🌱 -️Podman Containers Status - 🌱️\n"
 	@podman ps
 
