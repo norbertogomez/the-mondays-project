@@ -1,1 +1,3 @@
 .idea
+devops/monitoring/prometheus/var/prometheus/prometheus_data/data
+devops/monitoring/prometheus/var/prometheus/prometheus_data/wal
