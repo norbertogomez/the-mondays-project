@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extra_config": {
+    "github_com/devopsfaith/krakend-gologging": {
+      "level": "ERROR",
+      "prefix": "[KRAKEND]",
+      "syslog": false,
+      "stdout": true,
+      "format": "default"
+    }
+  },
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "name": "MondayGO",
+  "port": 8081,
+  "endpoints": [
+    {
+      "endpoint": "/api-gateway",
+      "method": "GET",
+      "output_encoding": "json",
+      "extra_config": {},
+      "backend": [
+        {
+          "url_pattern": "/health",
+          "encoding": "json",
+          "sd": "static",
+          "method": "GET",
+          "extra_config": {},
+          "host": [
+            "http://172.30.0.2:8080"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    }
+  ]
+}

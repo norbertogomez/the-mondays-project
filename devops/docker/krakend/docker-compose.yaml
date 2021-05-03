@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  krakend:
+    image: devopsfaith/krakend:1.3.0
+    volumes:
+      - ./config:/etc/krakend
+    ports:
+      - "8081:8081"
+    networks:
+      - mondays_default
+
+networks:
+  mondays_default:
+    external: true
