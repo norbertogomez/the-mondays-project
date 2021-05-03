@@ -69,6 +69,9 @@ kubernetes-open-go-app: ## Opens minikube exposed Go app service in browser
 
 kubernetes-prune: kubernetes-delete-deploys kubernetes-delete-pods kubernetes-delete-svc ## Deletes all the running kubernetes things
 
+logs-krakend:
+	@docker-compose -f devops/docker/krakend/docker-compose.yaml logs krakend
+
 run-monday-go-docker: ## Runs Golang App with Docker🏃
 	@echo -e "🏃 - Running Golang App - 🏃\n"
 	@docker build -f monday/GoAPP.Dockerfile --no-cache -t $(golang_app_container) monday
@@ -87,6 +90,11 @@ start-kafka: ## Starts Kafka cluster 🔌
 	@docker-compose -f devops/docker/kafka/docker-compose.yml up -d
 	@echo -e "\n✅ - Done - ✅\n"
 
+start-krakend: ## Runs Krakend as API Gateway
+	@echo -e "🏃 - Starting Krakend - 🏃\n"
+	@docker-compose -f devops/docker/krakend/docker-compose.yaml up -d
+	@echo -e "\n✅ - Done - ✅\n"
+
 start-kubernetes: ## Starts Kubernetes environment 🔌
 	@echo -e "🔌 - Starting Kubernetes environment - 🔌\n"
 	@minikube start
@@ -95,6 +103,11 @@ start-kubernetes: ## Starts Kubernetes environment 🔌
 start-prometheus: ## 📊 Starts Prometheus monitoring 📊
 	@echo -e " 🔌 - Starting Prometheus - 🔌 "
 	@docker-compose -f devops/monitoring/prometheus/docker-compose.yaml up -d
+	@echo -e "\n✅ - Done - ✅\n"
+
+stop-krakend: ## Stops Krakend as API Gateway
+	@echo -e "🏃 - Stopping Krakend - 🏃\n"
+	@docker-compose -f devops/docker/krakend/docker-compose.yaml down
 	@echo -e "\n✅ - Done - ✅\n"
 
 stop-kubernetes: ## Stops Kubernetes environment 🛑
